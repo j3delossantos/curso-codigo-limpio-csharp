@@ -26,7 +26,7 @@ List<string> TaskList  = new List<string>();
     } while ((Menu)activeMenu != Menu.Exit);
         
         /// <summary>
-        /// Show the main menu 
+        /// Show available task options
         /// </summary>
         /// <returns>Returns option indicated by user</returns>
 int ShowMainMenu()
@@ -39,7 +39,6 @@ int ShowMainMenu()
             $"2. 4. Salir");
         
 
-        // Read line
         string UserInput = Console.ReadLine();
         return Convert.ToInt32(UserInput);
     }
@@ -49,11 +48,11 @@ void ShowMenuDelete()
     try
     {
         Console.WriteLine("Ingrese el número de la tarea a remover: ");
-        // Show current taks
+        
         ShowMenuTaskList();
 
         string UserInput = Console.ReadLine();
-        // Remove one position
+        // Remove one position because the array start in 0
         int indexToRemove = Convert.ToInt32(UserInput) - 1;
 
         if (indexToRemove > (TaskList.Count -1) || indexToRemove < -0) 
@@ -71,10 +70,10 @@ void ShowMenuDelete()
             }
         }
     }
-    catch (Exception ex)
+    catch (Exception)
     {
         Console.WriteLine("Ha ocurrido un error al tratar de eliminar la tarea");
-        //ex.Message
+        
     }
 }
 
@@ -94,7 +93,7 @@ catch (Exception)
 
 void ShowMenuTaskList()
 {
-    //if (TaskList == null || TaskList.Count == 0)
+   
     if (TaskList?.Count > 0)
     {
         Console.WriteLine("----------------------------------------");
@@ -103,12 +102,7 @@ void ShowMenuTaskList()
 
         Console.WriteLine("----------------------------------------");
 
-        /*
-        for (int i = 0; i < TaskList.Count; i++)
-        {
-            Console.WriteLine((i + 1) + ". " + TaskList[i]);
-        }
-        */
+        
     }
     else
     {
