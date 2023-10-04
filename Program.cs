@@ -5,11 +5,10 @@ namespace ToDo
 {
     internal class Program
     {
-        public static List<string> TaskList { get; set; }
+        public static List<string> TaskList { get; set; } = new List<string>();
 
         static void Main(string[] args)
-        {
-            TaskList = new List<string>();
+        {           
             int activeMenu = 0;
             do
             {
@@ -58,15 +57,26 @@ namespace ToDo
                 string UserInput = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(UserInput) - 1;
-                if (indexToRemove > -1 && TaskList.Count > 0)
+
+                if (indexToRemove > (TaskList.Count -1) || indexToRemove < -0) 
                 {
+                    Console.WriteLine("El número seleccionado esta fuera de rango");
+
+                }
+                else
+                {
+                    if (indexToRemove > -1 && TaskList.Count > 0)
+                    {
                         string taskToDelete = TaskList[indexToRemove];
                         TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskToDelete + " eliminada");                   
+                        Console.WriteLine($"Tarea {taskToDelete} eliminada");
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Ha ocurrido un error al tratar de eliminar la tarea");
+                //ex.Message
             }
         }
 
@@ -86,15 +96,12 @@ namespace ToDo
 
         public static void ShowMenuTaskList()
         {
-            if (TaskList == null || TaskList.Count == 0)
-            {
-                Console.WriteLine("No hay tareas por realizar");
-            } 
-            else
+            //if (TaskList == null || TaskList.Count == 0)
+            if (TaskList?.Count > 0)
             {
                 Console.WriteLine("----------------------------------------");
                 int indexTask = 1;
-                TaskList.ForEach(p=> Console.WriteLine($"{indexTask++}. {p}"));
+                TaskList.ForEach(p => Console.WriteLine($"{indexTask++}. {p}"));
 
                 Console.WriteLine("----------------------------------------");
 
@@ -104,6 +111,11 @@ namespace ToDo
                     Console.WriteLine((i + 1) + ". " + TaskList[i]);
                 }
                 */
+            }
+            else
+            {
+                
+                Console.WriteLine("No hay tareas por realizar");
 
             }
         }
